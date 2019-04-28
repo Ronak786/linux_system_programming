@@ -1,0 +1,89 @@
+Compilation Process
+===============================
+
+The compiler goes through many stages in compiling even a single file:
+
+Preprocessor (-E) - processes #include, #define, Removes Comments etc. 
+
+	gcc -E hello.c -o hello.i
+
+	You will notice that stdio.h header file will be replaced with its full code. 
+
+	If we add -v to the above command, it will give the order of execution of each tool and command line arguments are specified
+
+	gcc -E hello.c -o hello.i -v
+
+Compilation (-S) - Turns the preprocessed code into assembly language
+
+	gcc -S hello.i
+
+Assembly (-c) - Turns the assembly language into relocatable code
+
+	gcc -c hello.s
+
+	Since the output of this stage is a binary code, you cannot see the content through editor. 
+	This can be viewed using special tool called objdump.
+
+	objdump -D hello.o | more
+	objdump -d hello.o
+
+Linking  - Converts the relocatable file into machine executable code
+
+	Final stage at which all the linking of function calls with their definitions is done.
+	That means it links all the libraries and object files into a single executable file
+	It also adds some extra code to our program that is required when the program starts
+	and when the program ends.This code is called runtime code.
+
+	Dynamic Linking: gcc hello.c -o dynamicexe -lc
+	Static Linking : gcc hello.c -o staticexe -lc --static
+	ls -lh dynamicexe staticexe
+
+	Advantage of Static Linking: libc need not exist on the system
+	Advantage of Dynamic Linking: Executable size is less, but needs libc on the system
+
+What is ELF
+=======================
+
+ELF stands for Executable Linkable Format
+It is a format for storing programs or fragments of programs on disk, created as a result of compilation and linking.
+
+Files that are represented in this format
+
+1. Relocatable objects(.o)
+2. Normal Executable files (a.out)
+3. Shared object Files (.so)
+4. Core Files
+
+
+readelf command is used to display information about ELF Files
+readelf -a hello.o //to get all the contents of file
+
+
+Difference between Relocatable Code and Machine Executable Code
+================================================================
+
+1. Instructions of Relocatable Code are bound to offset address assigned as per the position of the instruction within the procedure
+Eg. 00000000 <main>
+	0:	55	push %ebp
+Executable binary code bounds to platform specific load address
+Eg. 0804312d <main>
+	0804312d:	55	push %ebp
+
+2. Function call instructions in relocatable object files referred to called functions offset position
+Eg. call 12 <main+0x12>
+Call instructions in executable binaries referred to functions base address
+Eg. call 8048300<printf@plt>
+
+3. Relocatable object files only contains instructions that appear in the source file
+Machine Executable code contains functionality plus run time code.
+
+Run Time Code
+=======================
+
+Linux run time code comprises of three key functions
+
+Init: Responsible for allocation of stack
+Start: Invoked after initialization of stack and is responsible for calling main function
+Fini: When main function returns, start invokes fini, it is responsible for releasing stack segment. 
+
+

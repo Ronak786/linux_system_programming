@@ -1,0 +1,3 @@
+We know our C Code goes through four stages: Preprocessing, compiling, assembling and linking
+
+gcc creates many intermediate files for each stage. By default gcc deletes these intermediate files. You can instruct gcc to avoid deleting intermediate files passing '--save-temps' option to it.
