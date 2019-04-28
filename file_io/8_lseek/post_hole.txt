@@ -1,0 +1,3 @@
+$ ./a.out
+$ ls -l file.hole check its size
+$ od -c file.hole let’s look at the actual contents
