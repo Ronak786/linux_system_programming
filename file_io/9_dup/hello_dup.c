@@ -26,6 +26,8 @@ int main(int argc, char * argv[]){
 
   //print to stdout, which is now duplicated to fd
   printf("Hello World!\n");
+  printf("value = %d\n", 5);
+  write(fd, "ronak", 5);
 
   return 0;
 }
