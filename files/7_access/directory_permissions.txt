@@ -1,0 +1,41 @@
+Execute,Read, Write Permissions on Directory
+====================================
+
+The first rule is that whenever we want to open any type of file by name, we must have execute permission in each directory mentioned in the name, including the current directory, if it is implied. This is why the execute permission bit for a directory is often called the search bit.
+
+
+	For example, to open the file /usr/include/stdio.h
+
+		we need execute permission in the directory /
+		execute permission in the directory /usr
+		execute permission in the directory /usr/include.
+
+Note that read permission for a directory and execute permission for a directory mean different things
+
+Read permission lets us read the directory, obtaining a list of all the filenames in the directory.
+
+Execute permission lets us pass through the directory when it is a component of a pathname that we are trying to access
+
+We cannot create a new file in a directory unless we have write permission and execute permission in the directory
+
+To delete an existing file, we need write permission and execute permission in the directory containing the file. We do not need read permission or write permission for the file itself.
+
+$mkdir hello
+
+$ ls -al hello
+
+$chmod u-x hello/
+
+$ chmod u+x hello/
+
+$ chmod u-r hello/
+
+$ cd hello/
+
+$ ls
+
+$ chmod u-w .
+
+$ touch file.txt
+
+

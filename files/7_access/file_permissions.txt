@@ -1,0 +1,8 @@
+
+The read permission for a file determines whether we can open an existing file for reading: the O_RDONLY and O_RDWR flags for the open function.
+
+The write permission for a file determines whether we can open an existing file for writing: the O_WRONLY and O_RDWR flags for the open function.
+
+Execute permission for a file must be on if we want to execute the file using any of the seven exec functions. The file also has to be a regular file.
+
+
