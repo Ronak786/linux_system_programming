@@ -1,0 +1,27 @@
+exec
+==============
+
+When a process calls one of the exec functions, that process is completely replaced by the new program, and the new program starts executing at its main function.
+
+int execl(const char *path, const char *arg, ...);
+int execlp(const char *file, const char *arg, ...);
+int execle(const char *path, const char *arg,
+		..., char * const envp[]);
+int execv(const char *path, char *const argv[]);
+int execvp(const char *file, char *const argv[]);
+int execvpe(const char *file, char *const argv[],
+		char *const envp[]);
+
+The process ID does not change across an exec, because a new process is not created; exec merely replaces the current process — its text, data, heap, and stack segments — with a brand-new program from disk.
+
+The base of each is exec (execute), followed by one or more letters:
+
+e – An array of pointers to environment variables is explicitly passed to the new process image.
+
+l – Command-line arguments are passed individually (a list) to the function. You must include NULL after your last
+   parameter.:
+
+p – Uses the PATH environment variable to find the file named in the file argument to be executed.
+
+v – Command-line arguments are passed to the function as an array (vector) of pointers.
+

@@ -1,0 +1,31 @@
+Every process has a unique process ID, a non-negative integer.
+
+Because the process ID is the only well-known identifier of a process that is always unique, it is often used as a piece of other identifiers, to guarantee uniqueness
+
+For example, applications sometimes include the process ID as part of a filename in an attempt to generate unique filenames.
+
+There are some special processes, but the details differ from implementation to implementation.
+
+Process ID 0 is usually the scheduler process and is often known as the swapper.
+
+Process ID 1 is usually the init process and is invoked by the kernel at the end of the bootstrap procedure
+
+#include <unistd.h>
+
+pid_t getpid(void);
+Returns: process ID of calling process
+
+pid_t getppid(void);
+Returns: parent process ID of calling process
+
+uid_t getuid(void);
+Returns: real user ID of calling process
+
+uid_t geteuid(void);
+Returns: effective user ID of calling process
+
+gid_t getgid(void);
+Returns: real group ID of calling process
+
+gid_t getegid(void);
+Returns: effective group ID of calling process

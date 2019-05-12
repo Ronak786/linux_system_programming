@@ -1,0 +1,5 @@
+malloc(0) is actually using 32 bytes, including the first 0x10 bytes.
+
+Again, note that this will not always be the case. From the man page (man malloc):
+
+NULL may also be returned by a successful call to malloc() with a size of zero

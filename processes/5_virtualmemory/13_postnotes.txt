@@ -1,0 +1,15 @@
+As we can see from the above listing, when the previous chunk has been free'd, the malloc chunk's first 8 bytes contain the size of the previous unallocated chunk. 
+
+So the correct representation of a malloc chunk is the following
+
+0x10 bytes
+===========================
+--------------------------------
+length of     | length of |
+previous 	  |  current  |  Memory to be used by 
+chunk if      |  chunk    |  user
+unallocated   |           |
+---------------------------------
+
+
+
