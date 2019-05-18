@@ -5,6 +5,6 @@
 
 main(){
 	printf("Can you see me [ONE]\n");
-	execl("./test1","progname","arg1","arg2",NULL);	
+	execl("./test","progname","arg1","arg2",NULL);	
 	printf("Can you see me [TWO]\n");
 }

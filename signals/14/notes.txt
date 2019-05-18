@@ -1,0 +1,23 @@
+sigaction() is the more advanced form of the signal() system call
+
+Like signal(), sigaction() allows the programmer to specify a signal handler for a given signal, but it also enables the programmer to retrieve additional information about the signaling process and set additional flags and etc.
+
+The declaration of sigaction() is as follows:
+
+int sigaction(int signum, const struct sigaction *act,
+                   struct sigaction *oldact);
+
+First Argument: Signal to be handled
+
+second and third arguments are references to a struct sigaction
+
+struct sigaction {
+  void     (*sa_handler)(int);
+  void     (*sa_sigaction)(int, siginfo_t *, void *);
+  sigset_t   sa_mask;
+  int        sa_flags;
+};
+
+The first two fields, sa_handler and sa_sigaction are function references to signal handlers; sa_handler has the same type as the handlers we've been using previously
+
+

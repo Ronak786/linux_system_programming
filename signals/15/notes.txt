@@ -1,0 +1,16 @@
+when a signal handler is invoked, this is done outside the control flow of the program.
+
+Normally, the asynchronous invocation of the signal handler is not problematic: 
+the context of the program is saved; 
+the signal handler runs; and, 
+the original context of the program is restored.
+
+what happens when the context of the program is within a blocking function, like 
+reading from a device (read()) or 
+waiting for a process to terminate (wait())
+
+The arrival of the signal and invocation of the signal handler will interrupt the process, waking it from a blocking state to execute the signal handler, but what happens when it returns to the program?
+
+The answer to that question depends on the operation being performed. Most functions are reentrant and can be restarted in such cases, but others are explicitly not
+
+For example pause() is explicitly not reentrant by design; once interrupted, it should not return to a blocking state. But functions like read() and wait() need to be told to restart.

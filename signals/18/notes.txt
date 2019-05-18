@@ -1,0 +1,9 @@
+Without optimization it executes a loop that ends when the process receives SIGTERM or other sgnal that terminates the process and was not handler. When you compile it with the -O3 gcc flag it will not exit after receiving SIGTERM. Why? because whe while loop is optimized in such way that the exit_flag variable is loaded into a processor register once and not read from the memory in the loop.
+
+The compiler isn't aware that the loop is not the only place where the program accesses this variable while running the loop.
+
+In such cases - modifying a variable in a signal handler that is also accessed in some other parts of the program you must remember to instruct the compiler to always access this variable in memory when reading or writing them. 
+
+You should use the volatile keyword in the variable declaration
+
+static volatile int exit_flag = 0;

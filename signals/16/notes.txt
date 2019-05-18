@@ -1,0 +1,19 @@
+But, if you're late at all, it should start the barking process, but that's actually not what happens:
+
+Instead, we get an error in the scanf() function, which is a library function that must call read() to read from standard input. The read() is interrupted, which results in the error message "Interrupted system call" whose error number is EINTR. From the man page for read:
+
+EINTR  The  call  was interrupted by a signal before any data was read;
+       see signal(7).
+
+To avoid this scenario we need to set an additional flag for sigaction():
+
+struct sigaction {
+  void     (*sa_handler)(int);
+  void     (*sa_sigaction)(int, siginfo_t *, void *);
+  sigset_t   sa_mask;
+  int        sa_flags; //<---
+};
+
+What we are going to do, is update our annoying program from before to use a SA_RESTART flag so that read() will be restarted after the signal handler returns:
+
+

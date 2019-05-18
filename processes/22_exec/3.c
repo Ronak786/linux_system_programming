@@ -26,8 +26,8 @@ void prepare_env(){
 main(){
 	int fd;
 	fd = open("./file.test",O_RDONLY);
-	fcntl(fd,F_SETFD,FD_CLOEXEC) ; //set close on exec flag
-	//fcntl(fd,F_SETFD,0) ; //unset close on exec flag
+	//fcntl(fd,F_SETFD,FD_CLOEXEC) ; //set close on exec flag
+	fcntl(fd,F_SETFD,0) ; //unset close on exec flag
 	prepare_args();
 	prepare_env();
 	execve("./test3",argstochild,envofchild);	

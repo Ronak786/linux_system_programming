@@ -1,0 +1,7 @@
+This program will sleep for 10 seconds and will ignore the SIGTERM signal during the sleep. 
+
+It works this way because we've block the signal with sigprocmask(2). The signal is not ignored, it's blocked, it means that are queued by the kernel and delivered when we unblock the signal. This is different than ignoring the signal with signal(2).
+
+First sigprocmask(2) is more complicated, it operates in a set of signals represented by sigset_t, not on one signal. The SIG_BLOCK parameter tells that the the signals in set are to be blocked (in addition to the already blocked signals). The SIG_SETMASK tells that the signals in set are to be blocked, and signals that are not present in the set are to be unblocked. The third parameter, if not NULL, is written with the current signal mask. This allows to restore the mask after modifying the process' signal mask. 
+
+

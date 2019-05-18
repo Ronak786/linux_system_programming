@@ -26,7 +26,7 @@ void prepare_env(){
 main(){
 	fcntl(0,F_SETFD,FD_CLOEXEC) ; //set close on exec flag
 	fcntl(1,F_SETFD,FD_CLOEXEC) ; 
-	fcntl(2,F_SETFD,FD_CLOEXEC) ; 
+	//fcntl(2,F_SETFD,FD_CLOEXEC) ; 
 	prepare_args();
 	prepare_env();
 	execve("./test4",argstochild,envofchild);	

@@ -1,0 +1,5 @@
+It might seem like we've solved all the problems with the SA_RESTART flag, but not all system calls are reentrant. You can see a complete listing in man 7 signal, but we'll focus on one you might encounter in your programing. The sleep() system call is not reentrant
+
+A handler for SIGALRM is established with the SA_RESTART flag, so all should be good. An alarm is scheduled for 1 second and then the program should sleep for 2 seconds. The question is: How long does the program take to run?
+
+There are two possibilities. First, it could take 2 seconds because SIGALRM is handled the sleep() is restarted with an remaining 1 second to sleep, totaling 2 seconds worth runtime. Alternatively, the program will run for 1 second; once SIGALRM is handled, the sleep will not be restarted, and the program terminates with 1 second of runtime. Let's run it and find out.

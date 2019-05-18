@@ -22,7 +22,7 @@ void prepare_env(){
 	envofchild[2]=NULL;
 }
 main(){
-	printf("Can you see me [ONE]\n");
+	printf("Can you see me [ONE], pid:%u\n", getpid());
 	prepare_args();
 	prepare_env();
 	execve("./test",argstochild,envofchild);	

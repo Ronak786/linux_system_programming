@@ -1,0 +1,1 @@
+we use the three arguments version of signal handler for SIGTERM. Without setting the SA_SIGINFO flag we would use a traditional one argument version of the handler and pass the pointer to it by the sa_handler field. It would be a replacement for signal(2). You can try to run it and do kill PID to see what happens.
